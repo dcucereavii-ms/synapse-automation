@@ -6,13 +6,13 @@
 			"value": "dcucereavii-prod"
 		},
 		"AzureBlobStorage_connectionString": {
-			"value": "DefaultEndpointsProtocol=https;AccountName=synapsedemoproddc;EndpointSuffix=core.windows.net;"
+			"value": ""
 		},
 		"AzureBlobStrg_connectionString": {
-			"value": "DefaultEndpointsProtocol=https;AccountName=synapsetestwrkspace;EndpointSuffix=core.windows.net;"
+			"value": ""
 		},
 		"AzureSqlDatabaseCopy_connectionString": {
-			"value": "integrated security=False;encrypt=True;connection timeout=30;data source=sqlserversynapse-demo.database.windows.net;initial catalog=synapse-db-demo;user id=dcucereavii"
+			"value": ""
 		},
 		"dcucereavii-WorkspaceDefaultSqlServer_connectionString": {
 			"value": "Data Source=tcp:dcucereavii-prod.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
