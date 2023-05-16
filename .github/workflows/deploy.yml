@@ -3,7 +3,7 @@
 name: workspace deployment
 on:
     push:
-        branches: [ workspace_publish ]
+        branches: [ main ]
     workflow_dispatch:
       inputs:
         resourceGroupName:
