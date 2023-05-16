@@ -37,7 +37,7 @@ jobs:
         # Checks out your repository under $GITHUB_WORKSPACE, so your job can access it.
     - uses: actions/checkout@v2
     - run: | 
-        ls -la
+        ls
     - uses: Azure/Synapse-workspace-deployment@V1.7.0
       with:
           TargetWorkspaceName: ${{ github.event.inputs.SynapseWorkspaceName }}
