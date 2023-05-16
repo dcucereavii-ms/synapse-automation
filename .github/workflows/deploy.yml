@@ -37,16 +37,16 @@ jobs:
     - uses: actions/checkout@v2
     - uses: azure/synapse-workspace-deployment@release-1.0
       with:
-          TargetWorkspaceName: 'target workspace name'
-          TemplateFile: './path of the TemplateForWorkspace.json'
-          ParametersFile: './path of the TemplateParametersForWorkspace.json'
-          OverrideArmParameters: './path of the parameters.yaml'
+          TargetWorkspaceName: ${{ github.event.inputs.SynapseWorkspaceName }}
+          TemplateFile: ./workspace_publish/dcucereavii/${{ inputs.armTemplateFile }}
+          ParametersFile: /workspace_publish/dcucereavii/${{ inputs.armTemplateParametersFile }}
+          OverrideArmParameters: ''
           environment: 'Azure Public'
-          resourceGroup: 'target workspace resource group'
+          resourceGroup: ${{ github.event.inputs.resourceGroupName }}
           clientId: ${{secrets.CLIENTID}}
           clientSecret:  ${{secrets.CLIENTSECRET}}
-          subscriptionId: 'subscriptionId of the target workspace'
-          tenantId: 'tenantId'
+          subscriptionId: ${{ secrets.SUBSCRIPTION_ID }}
+          tenantId: ${{ secrets.TENANT_ID }}
           DeleteArtifactsNotInTemplate: 'true'
           managedIdentity: 'False'
 
