@@ -57,9 +57,9 @@ jobs:
             ParametersFile: '/workspace_publish/dcucereavii/TemplateParametersForWorkspace.json'
             environment: Azure Public
             resourceGroup: '${{ github.event.inputs.resourceGroupName }}'
-            clientId: ${{secrets.CLIENTID}}
-            clientSecret:  ${{secrets.CLIENTSECRET}}
-            subscriptionId: ${{ secrets.SUBSCRIPTION_ID }}
-            tenantId: ${{ secrets.TENANT_ID }}
+            clientId: '${{secrets.CLIENTID}}'
+            clientSecret:  '${{secrets.CLIENTSECRET}}'
+            subscriptionId: '${{ secrets.SUBSCRIPTION_ID }}'
+            tenantId: '${{ secrets.TENANT_ID }}'
             managedIdentity: 'False'
             operation: deploy
