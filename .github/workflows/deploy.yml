@@ -31,8 +31,8 @@ on:
 
 env:
   TargetResourceGroup: "synapse-demo-prod"
-  SourceWorkspaceName: "dcucereavii-prod"
-  TargetWorkspaceName: "dcucereavii"
+  SourceWorkspaceName: "dcucereavii"
+  TargetWorkspaceName: "dcucereavii-prod"
   
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel 
 jobs:
@@ -43,6 +43,10 @@ jobs:
  
         - name: Checkout collaboration branch
           uses: actions/checkout@v3
+          with:
+            ref: main
+        - run: |
+            ls
         - name: Checkout workspace_publish branch
           uses: actions/checkout@v3
           with:
