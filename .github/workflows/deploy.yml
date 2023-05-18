@@ -3,7 +3,7 @@
 name: workspace deployment
 on:
     push:
-        branches: [ main ]
+        branches: [ workspace_publish ]
     workflow_dispatch:
       inputs:
         resourceGroupName:
@@ -28,31 +28,38 @@ on:
           description: 'Parameters which skip the Az module installation'
           required: false
           default: 'false'
+
+env:
+  TargetResourceGroup: "synapse-demo-prod"
+  SourceWorkspaceName: "dcucereavii-prod"
+  TargetWorkspaceName: "dcucereavii"
+  
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel 
 jobs:
   release:
-        # You also can use the self-hosted runners.
-    runs-on: windows-latest
-    environment: PROD
-    steps:
-        # Checks out your repository under $GITHUB_WORKSPACE, so your job can access it.
-    - uses: actions/checkout@v2
-    - run: | 
-        ls
-    - uses: Azure/Synapse-workspace-deployment@V1.7.0
-      with:
-          TargetWorkspaceName: ${{ github.event.inputs.SynapseWorkspaceName }}
-          TemplateFile: './workspace_publish/dcucereavii/TemplateForWorkspace.json'
-          ParametersFile: '/workspace_publish/dcucereavii/TemplateParametersForWorkspace.json'
-          OverrideArmParameters: ''
-          environment: 'Azure Public'
-          resourceGroup: ${{ github.event.inputs.resourceGroupName }}
-          clientId: ${{secrets.CLIENTID}}
-          clientSecret:  ${{secrets.CLIENTSECRET}}
-          subscriptionId: ${{ secrets.SUBSCRIPTION_ID }}
-          tenantId: ${{ secrets.TENANT_ID }}
-          DeleteArtifactsNotInTemplate: 'true'
-          managedIdentity: 'False'
-
-
-    
-    
+      runs-on: windows-latest
+      environment: PROD
+      steps:
+ 
+        - name: Checkout collaboration branch
+          uses: actions/checkout@v3
+        - name: Checkout workspace_publish branch
+          uses: actions/checkout@v3
+          with:
+            ref: workspace_publish
+        - run: |
+            ls
+        - name: Build PROD        
+          uses: Azure/synapse-workspace-deployment@V1.7.0
+          with:
+            TargetWorkspaceName: '${{ github.event.inputs.SynapseWorkspaceName }}'
+            TemplateFile: './workspace_publish/dcucereavii/TemplateForWorkspace.json'
+            ParametersFile: '/workspace_publish/dcucereavii/TemplateParametersForWorkspace.json'
+            environment: Azure Public
+            resourceGroup: '${{ github.event.inputs.resourceGroupName }}'
+            clientId: ${{secrets.CLIENTID}}
+            clientSecret:  ${{secrets.CLIENTSECRET}}
+            subscriptionId: ${{ secrets.SUBSCRIPTION_ID }}
+            tenantId: ${{ secrets.TENANT_ID }}
+            managedIdentity: 'False'
+            operation: deploy
