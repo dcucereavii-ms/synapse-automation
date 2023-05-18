@@ -57,8 +57,8 @@ jobs:
           uses: Azure/synapse-workspace-deployment@V1.7.0
           with:
             TargetWorkspaceName: '${{ github.event.inputs.SynapseWorkspaceName }}'
-            TemplateFile: './workspace_publish/dcucereavii/TemplateForWorkspace.json'
-            ParametersFile: '/workspace_publish/dcucereavii/TemplateParametersForWorkspace.json'
+            TemplateFile: './dcucereavii/TemplateForWorkspace.json'
+            ParametersFile: './dcucereavii/TemplateParametersForWorkspace.json'
             environment: Azure Public
             resourceGroup: '${{ github.event.inputs.resourceGroupName }}'
             clientId: '${{secrets.CLIENT_ID}}'
